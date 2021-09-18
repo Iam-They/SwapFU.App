@@ -31,9 +31,29 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="app.ts" />
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include="contracts\FlashLoaner.sol" />
+    <Content Include="contracts\interfaces\IERC20.sol" />
+    <Content Include="contracts\interfaces\IUniswapV2Callee.sol" />
+    <Content Include="contracts\interfaces\IUniswapV2Pair.sol" />
+    <Content Include="contracts\interfaces\IUniswapV2Router01.sol" />
+    <Content Include="contracts\interfaces\IUniswapV2Router02.sol" />
+    <Content Include="contracts\Migrations.sol" />
+    <Content Include="contracts\UniswapV2Library.sol" />
+    <Content Include="migrations\1_initial_migration.js" />
+    <Content Include="migrations\2_deploy_contracts.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="test\.gitkeep" />
+    <Content Include="truffle-config.js" />
     <Content Include="tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="contracts\" />
+    <Folder Include="contracts\interfaces\" />
+    <Folder Include="migrations\" />
+    <Folder Include="test\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
