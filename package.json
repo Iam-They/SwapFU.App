@@ -1,5 +1,5 @@
 {
-  "name": "flashloaner-contract",
+  "name": "swapfu",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrobergamini/flashloaner-contract.git"
+    "url": "git+https://github.com/Iam-They/flashloaner-contract.git"
   },
   "keywords": ["defi", "ethereum", "flashloans"],
   "author": "Pedro Bergamini",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pedrobergamini/flashloaner-contract/issues"
+    "url": "https://github.com/Iam-They/flashloaner-contract/issues"
   }
 }
