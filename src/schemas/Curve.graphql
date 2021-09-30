@@ -1,0 +1,4734 @@
+﻿directive @entity on OBJECT
+
+directive @derivedFrom(field: String) on FIELD_DEFINITION
+
+directive @subgraphId(id: String) on OBJECT
+
+type Account {
+  id: ID!
+  address: Bytes!
+
+  """ Liquidity gauges this account contributed to """
+  gauges(skip: Int = 0, first: Int = 100, orderBy: GaugeLiquidity_orderBy, orderDirection: OrderDirection, where: GaugeLiquidity_filter): [GaugeLiquidity!]
+
+  """  """
+  gaugeWeightVotes(skip: Int = 0, first: Int = 100, orderBy: GaugeWeightVote_orderBy, orderDirection: OrderDirection, where: GaugeWeightVote_filter): [GaugeWeightVote!]
+
+  """ Proposal created by this account """
+  proposals(skip: Int = 0, first: Int = 100, orderBy: Proposal_orderBy, orderDirection: OrderDirection, where: Proposal_filter): [Proposal!]
+
+  """  """
+  proposalVotes(skip: Int = 0, first: Int = 100, orderBy: ProposalVote_orderBy, orderDirection: OrderDirection, where: ProposalVote_filter): [ProposalVote!]
+}
+
+input Account_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  address: Bytes
+  address_not: Bytes
+  address_in: [Bytes!]
+  address_not_in: [Bytes!]
+  address_contains: Bytes
+  address_not_contains: Bytes
+}
+
+enum Account_orderBy {
+  id
+  address
+  gauges
+  gaugeWeightVotes
+  proposals
+  proposalVotes
+}
+
+type AddLiquidityEvent implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  provider: Account!
+  tokenAmounts: [BigInt!]!
+  fees: [BigInt!]!
+  invariant: BigInt!
+  tokenSupply: BigInt!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input AddLiquidityEvent_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  provider: String
+  provider_not: String
+  provider_gt: String
+  provider_lt: String
+  provider_gte: String
+  provider_lte: String
+  provider_in: [String!]
+  provider_not_in: [String!]
+  provider_contains: String
+  provider_not_contains: String
+  provider_starts_with: String
+  provider_not_starts_with: String
+  provider_ends_with: String
+  provider_not_ends_with: String
+  tokenAmounts: [BigInt!]
+  tokenAmounts_not: [BigInt!]
+  tokenAmounts_contains: [BigInt!]
+  tokenAmounts_not_contains: [BigInt!]
+  fees: [BigInt!]
+  fees_not: [BigInt!]
+  fees_contains: [BigInt!]
+  fees_not_contains: [BigInt!]
+  invariant: BigInt
+  invariant_not: BigInt
+  invariant_gt: BigInt
+  invariant_lt: BigInt
+  invariant_gte: BigInt
+  invariant_lte: BigInt
+  invariant_in: [BigInt!]
+  invariant_not_in: [BigInt!]
+  tokenSupply: BigInt
+  tokenSupply_not: BigInt
+  tokenSupply_gt: BigInt
+  tokenSupply_lt: BigInt
+  tokenSupply_gte: BigInt
+  tokenSupply_lte: BigInt
+  tokenSupply_in: [BigInt!]
+  tokenSupply_not_in: [BigInt!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum AddLiquidityEvent_orderBy {
+  id
+  pool
+  provider
+  tokenAmounts
+  fees
+  invariant
+  tokenSupply
+  block
+  timestamp
+  transaction
+}
+
+type AdminFeeChangelog implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  value: BigDecimal!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input AdminFeeChangelog_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  value: BigDecimal
+  value_not: BigDecimal
+  value_gt: BigDecimal
+  value_lt: BigDecimal
+  value_gte: BigDecimal
+  value_lte: BigDecimal
+  value_in: [BigDecimal!]
+  value_not_in: [BigDecimal!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum AdminFeeChangelog_orderBy {
+  id
+  pool
+  value
+  block
+  timestamp
+  transaction
+}
+
+type AmplificationCoeffChangelog implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  value: BigInt!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input AmplificationCoeffChangelog_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  value: BigInt
+  value_not: BigInt
+  value_gt: BigInt
+  value_lt: BigInt
+  value_gte: BigInt
+  value_lte: BigInt
+  value_in: [BigInt!]
+  value_not_in: [BigInt!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum AmplificationCoeffChangelog_orderBy {
+  id
+  pool
+  value
+  block
+  timestamp
+  transaction
+}
+
+enum AssetType {
+  ETH
+  BTC
+  USD
+  OTHER
+  CRYPTO
+  EUR
+  LINK
+}
+
+scalar BigDecimal
+
+scalar BigInt
+
+input Block_height {
+  hash: Bytes
+  number: Int
+}
+
+scalar Bytes
+
+type Coin {
+  """ Equals to: <pool_id>-<coin_index>"""
+  id: ID!
+
+  """ Coin index """
+  index: Int!
+  pool: Pool!
+  token: Token!
+  underlying: UnderlyingCoin!
+  balance: BigDecimal!
+
+  """ Exchange rate between this coin and the associated underlying coin within the pool
+  """
+  rate: BigDecimal!
+  updated: BigInt!
+  updatedAtBlock: BigInt!
+  updatedAtTransaction: Bytes!
+}
+
+input Coin_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  index: Int
+  index_not: Int
+  index_gt: Int
+  index_lt: Int
+  index_gte: Int
+  index_lte: Int
+  index_in: [Int!]
+  index_not_in: [Int!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  token: String
+  token_not: String
+  token_gt: String
+  token_lt: String
+  token_gte: String
+  token_lte: String
+  token_in: [String!]
+  token_not_in: [String!]
+  token_contains: String
+  token_not_contains: String
+  token_starts_with: String
+  token_not_starts_with: String
+  token_ends_with: String
+  token_not_ends_with: String
+  underlying: String
+  underlying_not: String
+  underlying_gt: String
+  underlying_lt: String
+  underlying_gte: String
+  underlying_lte: String
+  underlying_in: [String!]
+  underlying_not_in: [String!]
+  underlying_contains: String
+  underlying_not_contains: String
+  underlying_starts_with: String
+  underlying_not_starts_with: String
+  underlying_ends_with: String
+  underlying_not_ends_with: String
+  balance: BigDecimal
+  balance_not: BigDecimal
+  balance_gt: BigDecimal
+  balance_lt: BigDecimal
+  balance_gte: BigDecimal
+  balance_lte: BigDecimal
+  balance_in: [BigDecimal!]
+  balance_not_in: [BigDecimal!]
+  rate: BigDecimal
+  rate_not: BigDecimal
+  rate_gt: BigDecimal
+  rate_lt: BigDecimal
+  rate_gte: BigDecimal
+  rate_lte: BigDecimal
+  rate_in: [BigDecimal!]
+  rate_not_in: [BigDecimal!]
+  updated: BigInt
+  updated_not: BigInt
+  updated_gt: BigInt
+  updated_lt: BigInt
+  updated_gte: BigInt
+  updated_lte: BigInt
+  updated_in: [BigInt!]
+  updated_not_in: [BigInt!]
+  updatedAtBlock: BigInt
+  updatedAtBlock_not: BigInt
+  updatedAtBlock_gt: BigInt
+  updatedAtBlock_lt: BigInt
+  updatedAtBlock_gte: BigInt
+  updatedAtBlock_lte: BigInt
+  updatedAtBlock_in: [BigInt!]
+  updatedAtBlock_not_in: [BigInt!]
+  updatedAtTransaction: Bytes
+  updatedAtTransaction_not: Bytes
+  updatedAtTransaction_in: [Bytes!]
+  updatedAtTransaction_not_in: [Bytes!]
+  updatedAtTransaction_contains: Bytes
+  updatedAtTransaction_not_contains: Bytes
+}
+
+enum Coin_orderBy {
+  id
+  index
+  pool
+  token
+  underlying
+  balance
+  rate
+  updated
+  updatedAtBlock
+  updatedAtTransaction
+}
+
+type Contract {
+  id: ID!
+
+  """ Human-readable description """
+  description: String
+  added: BigInt!
+  addedAtBlock: BigInt!
+  addedAtTransaction: Bytes!
+  modified: BigInt!
+  modifiedAtBlock: BigInt!
+  modifiedAtTransaction: Bytes!
+  versions(skip: Int = 0, first: Int = 100, orderBy: ContractVersion_orderBy, orderDirection: OrderDirection, where: ContractVersion_filter): [ContractVersion!]
+}
+
+type ContractVersion {
+  id: ID!
+  contract: Contract!
+  address: Bytes!
+  version: BigInt!
+  added: BigInt!
+  addedAtBlock: BigInt!
+  addedAtTransaction: Bytes!
+}
+
+input ContractVersion_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  contract: String
+  contract_not: String
+  contract_gt: String
+  contract_lt: String
+  contract_gte: String
+  contract_lte: String
+  contract_in: [String!]
+  contract_not_in: [String!]
+  contract_contains: String
+  contract_not_contains: String
+  contract_starts_with: String
+  contract_not_starts_with: String
+  contract_ends_with: String
+  contract_not_ends_with: String
+  address: Bytes
+  address_not: Bytes
+  address_in: [Bytes!]
+  address_not_in: [Bytes!]
+  address_contains: Bytes
+  address_not_contains: Bytes
+  version: BigInt
+  version_not: BigInt
+  version_gt: BigInt
+  version_lt: BigInt
+  version_gte: BigInt
+  version_lte: BigInt
+  version_in: [BigInt!]
+  version_not_in: [BigInt!]
+  added: BigInt
+  added_not: BigInt
+  added_gt: BigInt
+  added_lt: BigInt
+  added_gte: BigInt
+  added_lte: BigInt
+  added_in: [BigInt!]
+  added_not_in: [BigInt!]
+  addedAtBlock: BigInt
+  addedAtBlock_not: BigInt
+  addedAtBlock_gt: BigInt
+  addedAtBlock_lt: BigInt
+  addedAtBlock_gte: BigInt
+  addedAtBlock_lte: BigInt
+  addedAtBlock_in: [BigInt!]
+  addedAtBlock_not_in: [BigInt!]
+  addedAtTransaction: Bytes
+  addedAtTransaction_not: Bytes
+  addedAtTransaction_in: [Bytes!]
+  addedAtTransaction_not_in: [Bytes!]
+  addedAtTransaction_contains: Bytes
+  addedAtTransaction_not_contains: Bytes
+}
+
+enum ContractVersion_orderBy {
+  id
+  contract
+  address
+  version
+  added
+  addedAtBlock
+  addedAtTransaction
+}
+
+input Contract_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  description: String
+  description_not: String
+  description_gt: String
+  description_lt: String
+  description_gte: String
+  description_lte: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  added: BigInt
+  added_not: BigInt
+  added_gt: BigInt
+  added_lt: BigInt
+  added_gte: BigInt
+  added_lte: BigInt
+  added_in: [BigInt!]
+  added_not_in: [BigInt!]
+  addedAtBlock: BigInt
+  addedAtBlock_not: BigInt
+  addedAtBlock_gt: BigInt
+  addedAtBlock_lt: BigInt
+  addedAtBlock_gte: BigInt
+  addedAtBlock_lte: BigInt
+  addedAtBlock_in: [BigInt!]
+  addedAtBlock_not_in: [BigInt!]
+  addedAtTransaction: Bytes
+  addedAtTransaction_not: Bytes
+  addedAtTransaction_in: [Bytes!]
+  addedAtTransaction_not_in: [Bytes!]
+  addedAtTransaction_contains: Bytes
+  addedAtTransaction_not_contains: Bytes
+  modified: BigInt
+  modified_not: BigInt
+  modified_gt: BigInt
+  modified_lt: BigInt
+  modified_gte: BigInt
+  modified_lte: BigInt
+  modified_in: [BigInt!]
+  modified_not_in: [BigInt!]
+  modifiedAtBlock: BigInt
+  modifiedAtBlock_not: BigInt
+  modifiedAtBlock_gt: BigInt
+  modifiedAtBlock_lt: BigInt
+  modifiedAtBlock_gte: BigInt
+  modifiedAtBlock_lte: BigInt
+  modifiedAtBlock_in: [BigInt!]
+  modifiedAtBlock_not_in: [BigInt!]
+  modifiedAtTransaction: Bytes
+  modifiedAtTransaction_not: Bytes
+  modifiedAtTransaction_in: [Bytes!]
+  modifiedAtTransaction_not_in: [Bytes!]
+  modifiedAtTransaction_contains: Bytes
+  modifiedAtTransaction_not_contains: Bytes
+}
+
+enum Contract_orderBy {
+  id
+  description
+  added
+  addedAtBlock
+  addedAtTransaction
+  modified
+  modifiedAtBlock
+  modifiedAtTransaction
+  versions
+}
+
+type DailyVolume implements TradeVolume {
+  id: ID!
+  pool: Pool!
+  timestamp: BigInt!
+  volume: BigDecimal!
+}
+
+input DailyVolume_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  volume: BigDecimal
+  volume_not: BigDecimal
+  volume_gt: BigDecimal
+  volume_lt: BigDecimal
+  volume_gte: BigDecimal
+  volume_lte: BigDecimal
+  volume_in: [BigDecimal!]
+  volume_not_in: [BigDecimal!]
+}
+
+enum DailyVolume_orderBy {
+  id
+  pool
+  timestamp
+  volume
+}
+
+type Exchange implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  buyer: Account!
+  receiver: Account!
+  tokenSold: Token!
+  tokenBought: Token!
+  amountSold: BigDecimal!
+  amountBought: BigDecimal!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input Exchange_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  buyer: String
+  buyer_not: String
+  buyer_gt: String
+  buyer_lt: String
+  buyer_gte: String
+  buyer_lte: String
+  buyer_in: [String!]
+  buyer_not_in: [String!]
+  buyer_contains: String
+  buyer_not_contains: String
+  buyer_starts_with: String
+  buyer_not_starts_with: String
+  buyer_ends_with: String
+  buyer_not_ends_with: String
+  receiver: String
+  receiver_not: String
+  receiver_gt: String
+  receiver_lt: String
+  receiver_gte: String
+  receiver_lte: String
+  receiver_in: [String!]
+  receiver_not_in: [String!]
+  receiver_contains: String
+  receiver_not_contains: String
+  receiver_starts_with: String
+  receiver_not_starts_with: String
+  receiver_ends_with: String
+  receiver_not_ends_with: String
+  tokenSold: String
+  tokenSold_not: String
+  tokenSold_gt: String
+  tokenSold_lt: String
+  tokenSold_gte: String
+  tokenSold_lte: String
+  tokenSold_in: [String!]
+  tokenSold_not_in: [String!]
+  tokenSold_contains: String
+  tokenSold_not_contains: String
+  tokenSold_starts_with: String
+  tokenSold_not_starts_with: String
+  tokenSold_ends_with: String
+  tokenSold_not_ends_with: String
+  tokenBought: String
+  tokenBought_not: String
+  tokenBought_gt: String
+  tokenBought_lt: String
+  tokenBought_gte: String
+  tokenBought_lte: String
+  tokenBought_in: [String!]
+  tokenBought_not_in: [String!]
+  tokenBought_contains: String
+  tokenBought_not_contains: String
+  tokenBought_starts_with: String
+  tokenBought_not_starts_with: String
+  tokenBought_ends_with: String
+  tokenBought_not_ends_with: String
+  amountSold: BigDecimal
+  amountSold_not: BigDecimal
+  amountSold_gt: BigDecimal
+  amountSold_lt: BigDecimal
+  amountSold_gte: BigDecimal
+  amountSold_lte: BigDecimal
+  amountSold_in: [BigDecimal!]
+  amountSold_not_in: [BigDecimal!]
+  amountBought: BigDecimal
+  amountBought_not: BigDecimal
+  amountBought_gt: BigDecimal
+  amountBought_lt: BigDecimal
+  amountBought_gte: BigDecimal
+  amountBought_lte: BigDecimal
+  amountBought_in: [BigDecimal!]
+  amountBought_not_in: [BigDecimal!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum Exchange_orderBy {
+  id
+  pool
+  buyer
+  receiver
+  tokenSold
+  tokenBought
+  amountSold
+  amountBought
+  block
+  timestamp
+  transaction
+}
+
+type FeeChangelog implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  value: BigDecimal!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input FeeChangelog_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  value: BigDecimal
+  value_not: BigDecimal
+  value_gt: BigDecimal
+  value_lt: BigDecimal
+  value_gte: BigDecimal
+  value_lte: BigDecimal
+  value_in: [BigDecimal!]
+  value_not_in: [BigDecimal!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum FeeChangelog_orderBy {
+  id
+  pool
+  value
+  block
+  timestamp
+  transaction
+}
+
+type Gauge {
+  id: ID!
+  address: Bytes!
+  type: GaugeType!
+  pool: Pool
+  created: BigInt!
+  createdAtBlock: BigInt!
+  createdAtTransaction: Bytes!
+  weights(skip: Int = 0, first: Int = 100, orderBy: GaugeWeight_orderBy, orderDirection: OrderDirection, where: GaugeWeight_filter): [GaugeWeight!]
+  weightVotes(skip: Int = 0, first: Int = 100, orderBy: GaugeWeightVote_orderBy, orderDirection: OrderDirection, where: GaugeWeightVote_filter): [GaugeWeightVote!]
+}
+
+type GaugeDeposit {
+  id: ID!
+  gauge: Gauge!
+  provider: Account!
+  value: BigDecimal!
+}
+
+input GaugeDeposit_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  gauge: String
+  gauge_not: String
+  gauge_gt: String
+  gauge_lt: String
+  gauge_gte: String
+  gauge_lte: String
+  gauge_in: [String!]
+  gauge_not_in: [String!]
+  gauge_contains: String
+  gauge_not_contains: String
+  gauge_starts_with: String
+  gauge_not_starts_with: String
+  gauge_ends_with: String
+  gauge_not_ends_with: String
+  provider: String
+  provider_not: String
+  provider_gt: String
+  provider_lt: String
+  provider_gte: String
+  provider_lte: String
+  provider_in: [String!]
+  provider_not_in: [String!]
+  provider_contains: String
+  provider_not_contains: String
+  provider_starts_with: String
+  provider_not_starts_with: String
+  provider_ends_with: String
+  provider_not_ends_with: String
+  value: BigDecimal
+  value_not: BigDecimal
+  value_gt: BigDecimal
+  value_lt: BigDecimal
+  value_gte: BigDecimal
+  value_lte: BigDecimal
+  value_in: [BigDecimal!]
+  value_not_in: [BigDecimal!]
+}
+
+enum GaugeDeposit_orderBy {
+  id
+  gauge
+  provider
+  value
+}
+
+type GaugeLiquidity {
+  id: ID!
+  user: Account!
+  gauge: Gauge!
+  originalBalance: BigInt!
+  originalSupply: BigInt!
+  workingBalance: BigInt!
+  workingSupply: BigInt!
+  timestamp: BigInt!
+  block: BigInt!
+  transaction: Bytes!
+}
+
+input GaugeLiquidity_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  user: String
+  user_not: String
+  user_gt: String
+  user_lt: String
+  user_gte: String
+  user_lte: String
+  user_in: [String!]
+  user_not_in: [String!]
+  user_contains: String
+  user_not_contains: String
+  user_starts_with: String
+  user_not_starts_with: String
+  user_ends_with: String
+  user_not_ends_with: String
+  gauge: String
+  gauge_not: String
+  gauge_gt: String
+  gauge_lt: String
+  gauge_gte: String
+  gauge_lte: String
+  gauge_in: [String!]
+  gauge_not_in: [String!]
+  gauge_contains: String
+  gauge_not_contains: String
+  gauge_starts_with: String
+  gauge_not_starts_with: String
+  gauge_ends_with: String
+  gauge_not_ends_with: String
+  originalBalance: BigInt
+  originalBalance_not: BigInt
+  originalBalance_gt: BigInt
+  originalBalance_lt: BigInt
+  originalBalance_gte: BigInt
+  originalBalance_lte: BigInt
+  originalBalance_in: [BigInt!]
+  originalBalance_not_in: [BigInt!]
+  originalSupply: BigInt
+  originalSupply_not: BigInt
+  originalSupply_gt: BigInt
+  originalSupply_lt: BigInt
+  originalSupply_gte: BigInt
+  originalSupply_lte: BigInt
+  originalSupply_in: [BigInt!]
+  originalSupply_not_in: [BigInt!]
+  workingBalance: BigInt
+  workingBalance_not: BigInt
+  workingBalance_gt: BigInt
+  workingBalance_lt: BigInt
+  workingBalance_gte: BigInt
+  workingBalance_lte: BigInt
+  workingBalance_in: [BigInt!]
+  workingBalance_not_in: [BigInt!]
+  workingSupply: BigInt
+  workingSupply_not: BigInt
+  workingSupply_gt: BigInt
+  workingSupply_lt: BigInt
+  workingSupply_gte: BigInt
+  workingSupply_lte: BigInt
+  workingSupply_in: [BigInt!]
+  workingSupply_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum GaugeLiquidity_orderBy {
+  id
+  user
+  gauge
+  originalBalance
+  originalSupply
+  workingBalance
+  workingSupply
+  timestamp
+  block
+  transaction
+}
+
+type GaugeTotalWeight {
+  id: ID!
+  time: BigInt!
+  weight: BigDecimal!
+}
+
+input GaugeTotalWeight_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  time: BigInt
+  time_not: BigInt
+  time_gt: BigInt
+  time_lt: BigInt
+  time_gte: BigInt
+  time_lte: BigInt
+  time_in: [BigInt!]
+  time_not_in: [BigInt!]
+  weight: BigDecimal
+  weight_not: BigDecimal
+  weight_gt: BigDecimal
+  weight_lt: BigDecimal
+  weight_gte: BigDecimal
+  weight_lte: BigDecimal
+  weight_in: [BigDecimal!]
+  weight_not_in: [BigDecimal!]
+}
+
+enum GaugeTotalWeight_orderBy {
+  id
+  time
+  weight
+}
+
+type GaugeType {
+  id: ID!
+  name: String!
+  gaugeCount: BigInt!
+  gauges(skip: Int = 0, first: Int = 100, orderBy: Gauge_orderBy, orderDirection: OrderDirection, where: Gauge_filter): [Gauge!]
+  weights(skip: Int = 0, first: Int = 100, orderBy: GaugeTypeWeight_orderBy, orderDirection: OrderDirection, where: GaugeTypeWeight_filter): [GaugeTypeWeight!]
+}
+
+type GaugeTypeWeight {
+  id: ID!
+  type: GaugeType!
+  time: BigInt!
+  weight: BigDecimal!
+}
+
+input GaugeTypeWeight_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  type: String
+  type_not: String
+  type_gt: String
+  type_lt: String
+  type_gte: String
+  type_lte: String
+  type_in: [String!]
+  type_not_in: [String!]
+  type_contains: String
+  type_not_contains: String
+  type_starts_with: String
+  type_not_starts_with: String
+  type_ends_with: String
+  type_not_ends_with: String
+  time: BigInt
+  time_not: BigInt
+  time_gt: BigInt
+  time_lt: BigInt
+  time_gte: BigInt
+  time_lte: BigInt
+  time_in: [BigInt!]
+  time_not_in: [BigInt!]
+  weight: BigDecimal
+  weight_not: BigDecimal
+  weight_gt: BigDecimal
+  weight_lt: BigDecimal
+  weight_gte: BigDecimal
+  weight_lte: BigDecimal
+  weight_in: [BigDecimal!]
+  weight_not_in: [BigDecimal!]
+}
+
+enum GaugeTypeWeight_orderBy {
+  id
+  type
+  time
+  weight
+}
+
+input GaugeType_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  gaugeCount: BigInt
+  gaugeCount_not: BigInt
+  gaugeCount_gt: BigInt
+  gaugeCount_lt: BigInt
+  gaugeCount_gte: BigInt
+  gaugeCount_lte: BigInt
+  gaugeCount_in: [BigInt!]
+  gaugeCount_not_in: [BigInt!]
+}
+
+enum GaugeType_orderBy {
+  id
+  name
+  gaugeCount
+  gauges
+  weights
+}
+
+type GaugeWeight {
+  id: ID!
+  gauge: Gauge!
+  time: BigInt!
+  weight: BigDecimal!
+}
+
+type GaugeWeightVote {
+  id: ID!
+  gauge: Gauge!
+  user: Account!
+  time: BigInt!
+  weight: BigDecimal!
+}
+
+input GaugeWeightVote_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  gauge: String
+  gauge_not: String
+  gauge_gt: String
+  gauge_lt: String
+  gauge_gte: String
+  gauge_lte: String
+  gauge_in: [String!]
+  gauge_not_in: [String!]
+  gauge_contains: String
+  gauge_not_contains: String
+  gauge_starts_with: String
+  gauge_not_starts_with: String
+  gauge_ends_with: String
+  gauge_not_ends_with: String
+  user: String
+  user_not: String
+  user_gt: String
+  user_lt: String
+  user_gte: String
+  user_lte: String
+  user_in: [String!]
+  user_not_in: [String!]
+  user_contains: String
+  user_not_contains: String
+  user_starts_with: String
+  user_not_starts_with: String
+  user_ends_with: String
+  user_not_ends_with: String
+  time: BigInt
+  time_not: BigInt
+  time_gt: BigInt
+  time_lt: BigInt
+  time_gte: BigInt
+  time_lte: BigInt
+  time_in: [BigInt!]
+  time_not_in: [BigInt!]
+  weight: BigDecimal
+  weight_not: BigDecimal
+  weight_gt: BigDecimal
+  weight_lt: BigDecimal
+  weight_gte: BigDecimal
+  weight_lte: BigDecimal
+  weight_in: [BigDecimal!]
+  weight_not_in: [BigDecimal!]
+}
+
+enum GaugeWeightVote_orderBy {
+  id
+  gauge
+  user
+  time
+  weight
+}
+
+input GaugeWeight_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  gauge: String
+  gauge_not: String
+  gauge_gt: String
+  gauge_lt: String
+  gauge_gte: String
+  gauge_lte: String
+  gauge_in: [String!]
+  gauge_not_in: [String!]
+  gauge_contains: String
+  gauge_not_contains: String
+  gauge_starts_with: String
+  gauge_not_starts_with: String
+  gauge_ends_with: String
+  gauge_not_ends_with: String
+  time: BigInt
+  time_not: BigInt
+  time_gt: BigInt
+  time_lt: BigInt
+  time_gte: BigInt
+  time_lte: BigInt
+  time_in: [BigInt!]
+  time_not_in: [BigInt!]
+  weight: BigDecimal
+  weight_not: BigDecimal
+  weight_gt: BigDecimal
+  weight_lt: BigDecimal
+  weight_gte: BigDecimal
+  weight_lte: BigDecimal
+  weight_in: [BigDecimal!]
+  weight_not_in: [BigDecimal!]
+}
+
+enum GaugeWeight_orderBy {
+  id
+  gauge
+  time
+  weight
+}
+
+type GaugeWithdraw {
+  id: ID!
+  gauge: Gauge!
+  provider: Account!
+  value: BigDecimal!
+}
+
+input GaugeWithdraw_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  gauge: String
+  gauge_not: String
+  gauge_gt: String
+  gauge_lt: String
+  gauge_gte: String
+  gauge_lte: String
+  gauge_in: [String!]
+  gauge_not_in: [String!]
+  gauge_contains: String
+  gauge_not_contains: String
+  gauge_starts_with: String
+  gauge_not_starts_with: String
+  gauge_ends_with: String
+  gauge_not_ends_with: String
+  provider: String
+  provider_not: String
+  provider_gt: String
+  provider_lt: String
+  provider_gte: String
+  provider_lte: String
+  provider_in: [String!]
+  provider_not_in: [String!]
+  provider_contains: String
+  provider_not_contains: String
+  provider_starts_with: String
+  provider_not_starts_with: String
+  provider_ends_with: String
+  provider_not_ends_with: String
+  value: BigDecimal
+  value_not: BigDecimal
+  value_gt: BigDecimal
+  value_lt: BigDecimal
+  value_gte: BigDecimal
+  value_lte: BigDecimal
+  value_in: [BigDecimal!]
+  value_not_in: [BigDecimal!]
+}
+
+enum GaugeWithdraw_orderBy {
+  id
+  gauge
+  provider
+  value
+}
+
+input Gauge_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  address: Bytes
+  address_not: Bytes
+  address_in: [Bytes!]
+  address_not_in: [Bytes!]
+  address_contains: Bytes
+  address_not_contains: Bytes
+  type: String
+  type_not: String
+  type_gt: String
+  type_lt: String
+  type_gte: String
+  type_lte: String
+  type_in: [String!]
+  type_not_in: [String!]
+  type_contains: String
+  type_not_contains: String
+  type_starts_with: String
+  type_not_starts_with: String
+  type_ends_with: String
+  type_not_ends_with: String
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  created: BigInt
+  created_not: BigInt
+  created_gt: BigInt
+  created_lt: BigInt
+  created_gte: BigInt
+  created_lte: BigInt
+  created_in: [BigInt!]
+  created_not_in: [BigInt!]
+  createdAtBlock: BigInt
+  createdAtBlock_not: BigInt
+  createdAtBlock_gt: BigInt
+  createdAtBlock_lt: BigInt
+  createdAtBlock_gte: BigInt
+  createdAtBlock_lte: BigInt
+  createdAtBlock_in: [BigInt!]
+  createdAtBlock_not_in: [BigInt!]
+  createdAtTransaction: Bytes
+  createdAtTransaction_not: Bytes
+  createdAtTransaction_in: [Bytes!]
+  createdAtTransaction_not_in: [Bytes!]
+  createdAtTransaction_contains: Bytes
+  createdAtTransaction_not_contains: Bytes
+}
+
+enum Gauge_orderBy {
+  id
+  address
+  type
+  pool
+  created
+  createdAtBlock
+  createdAtTransaction
+  weights
+  weightVotes
+}
+
+type HourlyVolume implements TradeVolume {
+  id: ID!
+  pool: Pool!
+  timestamp: BigInt!
+  volume: BigDecimal!
+}
+
+input HourlyVolume_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  volume: BigDecimal
+  volume_not: BigDecimal
+  volume_gt: BigDecimal
+  volume_lt: BigDecimal
+  volume_gte: BigDecimal
+  volume_lte: BigDecimal
+  volume_in: [BigDecimal!]
+  volume_not_in: [BigDecimal!]
+}
+
+enum HourlyVolume_orderBy {
+  id
+  pool
+  timestamp
+  volume
+}
+
+type LpToken {
+  id: ID!
+  address: Bytes!
+  decimals: BigInt!
+  name: String
+  symbol: String
+  gauge: Gauge
+  pool: Pool
+}
+
+input LpToken_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  address: Bytes
+  address_not: Bytes
+  address_in: [Bytes!]
+  address_not_in: [Bytes!]
+  address_contains: Bytes
+  address_not_contains: Bytes
+  decimals: BigInt
+  decimals_not: BigInt
+  decimals_gt: BigInt
+  decimals_lt: BigInt
+  decimals_gte: BigInt
+  decimals_lte: BigInt
+  decimals_in: [BigInt!]
+  decimals_not_in: [BigInt!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  symbol: String
+  symbol_not: String
+  symbol_gt: String
+  symbol_lt: String
+  symbol_gte: String
+  symbol_lte: String
+  symbol_in: [String!]
+  symbol_not_in: [String!]
+  symbol_contains: String
+  symbol_not_contains: String
+  symbol_starts_with: String
+  symbol_not_starts_with: String
+  symbol_ends_with: String
+  symbol_not_ends_with: String
+  gauge: String
+  gauge_not: String
+  gauge_gt: String
+  gauge_lt: String
+  gauge_gte: String
+  gauge_lte: String
+  gauge_in: [String!]
+  gauge_not_in: [String!]
+  gauge_contains: String
+  gauge_not_contains: String
+  gauge_starts_with: String
+  gauge_not_starts_with: String
+  gauge_ends_with: String
+  gauge_not_ends_with: String
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+}
+
+enum LpToken_orderBy {
+  id
+  address
+  decimals
+  name
+  symbol
+  gauge
+  pool
+}
+
+enum OrderDirection {
+  asc
+  desc
+}
+
+type Pool {
+  """ Pool address """
+  id: ID!
+
+  """ Pool's human-readable name """
+  name: String!
+
+  """ Reference asset type """
+  assetType: AssetType
+
+  """ Identify whether pool is a metapool """
+  isMeta: Boolean!
+
+  """ Registry contract address from where this pool was registered """
+  registryAddress: Bytes!
+
+  """ Swap contract address """
+  swapAddress: Bytes!
+
+  """ Address of the token representing LP share """
+  lpToken: LpToken!
+
+  """ Number of coins composing the pool """
+  coinCount: BigInt!
+
+  """ List of the swappable coins within the pool """
+  coins(skip: Int = 0, first: Int = 100, orderBy: Coin_orderBy, orderDirection: OrderDirection, where: Coin_filter): [Coin!]
+
+  """ Number of underlying coins composing the pool """
+  underlyingCount: BigInt!
+
+  """ List of the swappable underlying coins within the pool """
+  underlyingCoins(skip: Int = 0, first: Int = 100, orderBy: UnderlyingCoin_orderBy, orderDirection: OrderDirection, where: UnderlyingCoin_filter): [UnderlyingCoin!]
+
+  """ Amplification coefficient multiplied by n * (n - 1) """
+  A: BigInt
+
+  """ Fee to charge for exchanges """
+  fee: BigDecimal
+
+  """ Admin fee is represented as a percentage of the total fee collected on a swap
+  """
+  adminFee: BigDecimal
+
+  """ Admin address """
+  owner: Bytes
+
+  """ Average dollar value of pool token """
+  virtualPrice: BigDecimal!
+  locked: BigDecimal!
+  addedAt: BigInt!
+  addedAtBlock: BigInt!
+  addedAtTransaction: Bytes!
+  removedAt: BigInt
+  removedAtBlock: BigInt
+  removedAtTransaction: Bytes
+  events(skip: Int = 0, first: Int = 100, orderBy: PoolEvent_orderBy, orderDirection: OrderDirection, where: PoolEvent_filter): [PoolEvent!]
+  exchangeCount: BigInt!
+  exchanges(skip: Int = 0, first: Int = 100, orderBy: Exchange_orderBy, orderDirection: OrderDirection, where: Exchange_filter): [Exchange!]
+  gaugeCount: BigInt!
+
+  """ List of gauge contracts associated with the pool """
+  gauges(skip: Int = 0, first: Int = 100, orderBy: Gauge_orderBy, orderDirection: OrderDirection, where: Gauge_filter): [Gauge!]
+
+  """ Cumulative hourly trade volume """
+  hourlyVolumes(skip: Int = 0, first: Int = 100, orderBy: HourlyVolume_orderBy, orderDirection: OrderDirection, where: HourlyVolume_filter): [HourlyVolume!]
+
+  """ Cumulative daily trade volume """
+  dailyVolumes(skip: Int = 0, first: Int = 100, orderBy: DailyVolume_orderBy, orderDirection: OrderDirection, where: DailyVolume_filter): [DailyVolume!]
+
+  """ Cumulative weekly trade volume """
+  weeklyVolumes(skip: Int = 0, first: Int = 100, orderBy: WeeklyVolume_orderBy, orderDirection: OrderDirection, where: WeeklyVolume_filter): [WeeklyVolume!]
+}
+
+interface PoolEvent {
+  pool: Pool!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input PoolEvent_filter {
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum PoolEvent_orderBy {
+  pool
+  block
+  timestamp
+  transaction
+}
+
+input Pool_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  assetType: AssetType
+  assetType_not: AssetType
+  isMeta: Boolean
+  isMeta_not: Boolean
+  isMeta_in: [Boolean!]
+  isMeta_not_in: [Boolean!]
+  registryAddress: Bytes
+  registryAddress_not: Bytes
+  registryAddress_in: [Bytes!]
+  registryAddress_not_in: [Bytes!]
+  registryAddress_contains: Bytes
+  registryAddress_not_contains: Bytes
+  swapAddress: Bytes
+  swapAddress_not: Bytes
+  swapAddress_in: [Bytes!]
+  swapAddress_not_in: [Bytes!]
+  swapAddress_contains: Bytes
+  swapAddress_not_contains: Bytes
+  lpToken: String
+  lpToken_not: String
+  lpToken_gt: String
+  lpToken_lt: String
+  lpToken_gte: String
+  lpToken_lte: String
+  lpToken_in: [String!]
+  lpToken_not_in: [String!]
+  lpToken_contains: String
+  lpToken_not_contains: String
+  lpToken_starts_with: String
+  lpToken_not_starts_with: String
+  lpToken_ends_with: String
+  lpToken_not_ends_with: String
+  coinCount: BigInt
+  coinCount_not: BigInt
+  coinCount_gt: BigInt
+  coinCount_lt: BigInt
+  coinCount_gte: BigInt
+  coinCount_lte: BigInt
+  coinCount_in: [BigInt!]
+  coinCount_not_in: [BigInt!]
+  underlyingCount: BigInt
+  underlyingCount_not: BigInt
+  underlyingCount_gt: BigInt
+  underlyingCount_lt: BigInt
+  underlyingCount_gte: BigInt
+  underlyingCount_lte: BigInt
+  underlyingCount_in: [BigInt!]
+  underlyingCount_not_in: [BigInt!]
+  A: BigInt
+  A_not: BigInt
+  A_gt: BigInt
+  A_lt: BigInt
+  A_gte: BigInt
+  A_lte: BigInt
+  A_in: [BigInt!]
+  A_not_in: [BigInt!]
+  fee: BigDecimal
+  fee_not: BigDecimal
+  fee_gt: BigDecimal
+  fee_lt: BigDecimal
+  fee_gte: BigDecimal
+  fee_lte: BigDecimal
+  fee_in: [BigDecimal!]
+  fee_not_in: [BigDecimal!]
+  adminFee: BigDecimal
+  adminFee_not: BigDecimal
+  adminFee_gt: BigDecimal
+  adminFee_lt: BigDecimal
+  adminFee_gte: BigDecimal
+  adminFee_lte: BigDecimal
+  adminFee_in: [BigDecimal!]
+  adminFee_not_in: [BigDecimal!]
+  owner: Bytes
+  owner_not: Bytes
+  owner_in: [Bytes!]
+  owner_not_in: [Bytes!]
+  owner_contains: Bytes
+  owner_not_contains: Bytes
+  virtualPrice: BigDecimal
+  virtualPrice_not: BigDecimal
+  virtualPrice_gt: BigDecimal
+  virtualPrice_lt: BigDecimal
+  virtualPrice_gte: BigDecimal
+  virtualPrice_lte: BigDecimal
+  virtualPrice_in: [BigDecimal!]
+  virtualPrice_not_in: [BigDecimal!]
+  locked: BigDecimal
+  locked_not: BigDecimal
+  locked_gt: BigDecimal
+  locked_lt: BigDecimal
+  locked_gte: BigDecimal
+  locked_lte: BigDecimal
+  locked_in: [BigDecimal!]
+  locked_not_in: [BigDecimal!]
+  addedAt: BigInt
+  addedAt_not: BigInt
+  addedAt_gt: BigInt
+  addedAt_lt: BigInt
+  addedAt_gte: BigInt
+  addedAt_lte: BigInt
+  addedAt_in: [BigInt!]
+  addedAt_not_in: [BigInt!]
+  addedAtBlock: BigInt
+  addedAtBlock_not: BigInt
+  addedAtBlock_gt: BigInt
+  addedAtBlock_lt: BigInt
+  addedAtBlock_gte: BigInt
+  addedAtBlock_lte: BigInt
+  addedAtBlock_in: [BigInt!]
+  addedAtBlock_not_in: [BigInt!]
+  addedAtTransaction: Bytes
+  addedAtTransaction_not: Bytes
+  addedAtTransaction_in: [Bytes!]
+  addedAtTransaction_not_in: [Bytes!]
+  addedAtTransaction_contains: Bytes
+  addedAtTransaction_not_contains: Bytes
+  removedAt: BigInt
+  removedAt_not: BigInt
+  removedAt_gt: BigInt
+  removedAt_lt: BigInt
+  removedAt_gte: BigInt
+  removedAt_lte: BigInt
+  removedAt_in: [BigInt!]
+  removedAt_not_in: [BigInt!]
+  removedAtBlock: BigInt
+  removedAtBlock_not: BigInt
+  removedAtBlock_gt: BigInt
+  removedAtBlock_lt: BigInt
+  removedAtBlock_gte: BigInt
+  removedAtBlock_lte: BigInt
+  removedAtBlock_in: [BigInt!]
+  removedAtBlock_not_in: [BigInt!]
+  removedAtTransaction: Bytes
+  removedAtTransaction_not: Bytes
+  removedAtTransaction_in: [Bytes!]
+  removedAtTransaction_not_in: [Bytes!]
+  removedAtTransaction_contains: Bytes
+  removedAtTransaction_not_contains: Bytes
+  exchangeCount: BigInt
+  exchangeCount_not: BigInt
+  exchangeCount_gt: BigInt
+  exchangeCount_lt: BigInt
+  exchangeCount_gte: BigInt
+  exchangeCount_lte: BigInt
+  exchangeCount_in: [BigInt!]
+  exchangeCount_not_in: [BigInt!]
+  gaugeCount: BigInt
+  gaugeCount_not: BigInt
+  gaugeCount_gt: BigInt
+  gaugeCount_lt: BigInt
+  gaugeCount_gte: BigInt
+  gaugeCount_lte: BigInt
+  gaugeCount_in: [BigInt!]
+  gaugeCount_not_in: [BigInt!]
+}
+
+enum Pool_orderBy {
+  id
+  name
+  assetType
+  isMeta
+  registryAddress
+  swapAddress
+  lpToken
+  coinCount
+  coins
+  underlyingCount
+  underlyingCoins
+  A
+  fee
+  adminFee
+  owner
+  virtualPrice
+  locked
+  addedAt
+  addedAtBlock
+  addedAtTransaction
+  removedAt
+  removedAtBlock
+  removedAtTransaction
+  events
+  exchangeCount
+  exchanges
+  gaugeCount
+  gauges
+  hourlyVolumes
+  dailyVolumes
+  weeklyVolumes
+}
+
+type Proposal {
+  id: ID!
+
+  """ Sequential number in related to the realted voting app """
+  number: BigInt!
+
+  """ Voting app instance """
+  app: VotingApp!
+
+  """ Proposal creator's account """
+  creator: Account!
+
+  """  """
+  executionScript: Bytes!
+
+  """  """
+  expireDate: BigInt!
+
+  """ Percentage of positive votes in total possible votes for this proposal to be accepted
+  """
+  minimumQuorum: BigDecimal!
+
+  """ Percentage of positive votes needed for this proposal to be accepted """
+  requiredSupport: BigDecimal!
+
+  """  """
+  snapshotBlock: BigInt!
+
+  """  """
+  votingPower: BigDecimal!
+
+  """ Link to metadata file """
+  metadata: String
+
+  """ Proposal description text """
+  text: String
+
+  """ Number of votes received by the proposal """
+  voteCount: BigInt!
+
+  """ Number of positive votes (yes) received by the proposal """
+  positiveVoteCount: BigInt!
+
+  """ Number of negative votes (no) received by the proposal """
+  negativeVoteCount: BigInt!
+
+  """  """
+  currentQuorum: BigDecimal!
+
+  """  """
+  currentSupport: BigDecimal!
+
+  """  """
+  stakedSupport: BigDecimal!
+
+  """  """
+  totalStaked: BigDecimal!
+
+  """  """
+  created: BigInt!
+
+  """  """
+  createdAtBlock: BigInt!
+
+  """  """
+  createdAtTransaction: Bytes!
+
+  """  """
+  updated: BigInt
+
+  """  """
+  updatedAtBlock: BigInt
+
+  """  """
+  updatedAtTransaction: Bytes
+
+  """  """
+  executed: BigInt
+
+  """  """
+  executedAtBlock: BigInt
+
+  """  """
+  executedAtTransaction: Bytes
+
+  """  """
+  votes(skip: Int = 0, first: Int = 100, orderBy: ProposalVote_orderBy, orderDirection: OrderDirection, where: ProposalVote_filter): [ProposalVote!]
+}
+
+type ProposalVote {
+  id: ID!
+  proposal: Proposal!
+  supports: Boolean!
+  stake: BigDecimal!
+  voter: Account!
+  created: BigInt!
+  createdAtBlock: BigInt!
+  createdAtTransaction: Bytes!
+}
+
+input ProposalVote_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  proposal: String
+  proposal_not: String
+  proposal_gt: String
+  proposal_lt: String
+  proposal_gte: String
+  proposal_lte: String
+  proposal_in: [String!]
+  proposal_not_in: [String!]
+  proposal_contains: String
+  proposal_not_contains: String
+  proposal_starts_with: String
+  proposal_not_starts_with: String
+  proposal_ends_with: String
+  proposal_not_ends_with: String
+  supports: Boolean
+  supports_not: Boolean
+  supports_in: [Boolean!]
+  supports_not_in: [Boolean!]
+  stake: BigDecimal
+  stake_not: BigDecimal
+  stake_gt: BigDecimal
+  stake_lt: BigDecimal
+  stake_gte: BigDecimal
+  stake_lte: BigDecimal
+  stake_in: [BigDecimal!]
+  stake_not_in: [BigDecimal!]
+  voter: String
+  voter_not: String
+  voter_gt: String
+  voter_lt: String
+  voter_gte: String
+  voter_lte: String
+  voter_in: [String!]
+  voter_not_in: [String!]
+  voter_contains: String
+  voter_not_contains: String
+  voter_starts_with: String
+  voter_not_starts_with: String
+  voter_ends_with: String
+  voter_not_ends_with: String
+  created: BigInt
+  created_not: BigInt
+  created_gt: BigInt
+  created_lt: BigInt
+  created_gte: BigInt
+  created_lte: BigInt
+  created_in: [BigInt!]
+  created_not_in: [BigInt!]
+  createdAtBlock: BigInt
+  createdAtBlock_not: BigInt
+  createdAtBlock_gt: BigInt
+  createdAtBlock_lt: BigInt
+  createdAtBlock_gte: BigInt
+  createdAtBlock_lte: BigInt
+  createdAtBlock_in: [BigInt!]
+  createdAtBlock_not_in: [BigInt!]
+  createdAtTransaction: Bytes
+  createdAtTransaction_not: Bytes
+  createdAtTransaction_in: [Bytes!]
+  createdAtTransaction_not_in: [Bytes!]
+  createdAtTransaction_contains: Bytes
+  createdAtTransaction_not_contains: Bytes
+}
+
+enum ProposalVote_orderBy {
+  id
+  proposal
+  supports
+  stake
+  voter
+  created
+  createdAtBlock
+  createdAtTransaction
+}
+
+input Proposal_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  number: BigInt
+  number_not: BigInt
+  number_gt: BigInt
+  number_lt: BigInt
+  number_gte: BigInt
+  number_lte: BigInt
+  number_in: [BigInt!]
+  number_not_in: [BigInt!]
+  app: String
+  app_not: String
+  app_gt: String
+  app_lt: String
+  app_gte: String
+  app_lte: String
+  app_in: [String!]
+  app_not_in: [String!]
+  app_contains: String
+  app_not_contains: String
+  app_starts_with: String
+  app_not_starts_with: String
+  app_ends_with: String
+  app_not_ends_with: String
+  creator: String
+  creator_not: String
+  creator_gt: String
+  creator_lt: String
+  creator_gte: String
+  creator_lte: String
+  creator_in: [String!]
+  creator_not_in: [String!]
+  creator_contains: String
+  creator_not_contains: String
+  creator_starts_with: String
+  creator_not_starts_with: String
+  creator_ends_with: String
+  creator_not_ends_with: String
+  executionScript: Bytes
+  executionScript_not: Bytes
+  executionScript_in: [Bytes!]
+  executionScript_not_in: [Bytes!]
+  executionScript_contains: Bytes
+  executionScript_not_contains: Bytes
+  expireDate: BigInt
+  expireDate_not: BigInt
+  expireDate_gt: BigInt
+  expireDate_lt: BigInt
+  expireDate_gte: BigInt
+  expireDate_lte: BigInt
+  expireDate_in: [BigInt!]
+  expireDate_not_in: [BigInt!]
+  minimumQuorum: BigDecimal
+  minimumQuorum_not: BigDecimal
+  minimumQuorum_gt: BigDecimal
+  minimumQuorum_lt: BigDecimal
+  minimumQuorum_gte: BigDecimal
+  minimumQuorum_lte: BigDecimal
+  minimumQuorum_in: [BigDecimal!]
+  minimumQuorum_not_in: [BigDecimal!]
+  requiredSupport: BigDecimal
+  requiredSupport_not: BigDecimal
+  requiredSupport_gt: BigDecimal
+  requiredSupport_lt: BigDecimal
+  requiredSupport_gte: BigDecimal
+  requiredSupport_lte: BigDecimal
+  requiredSupport_in: [BigDecimal!]
+  requiredSupport_not_in: [BigDecimal!]
+  snapshotBlock: BigInt
+  snapshotBlock_not: BigInt
+  snapshotBlock_gt: BigInt
+  snapshotBlock_lt: BigInt
+  snapshotBlock_gte: BigInt
+  snapshotBlock_lte: BigInt
+  snapshotBlock_in: [BigInt!]
+  snapshotBlock_not_in: [BigInt!]
+  votingPower: BigDecimal
+  votingPower_not: BigDecimal
+  votingPower_gt: BigDecimal
+  votingPower_lt: BigDecimal
+  votingPower_gte: BigDecimal
+  votingPower_lte: BigDecimal
+  votingPower_in: [BigDecimal!]
+  votingPower_not_in: [BigDecimal!]
+  metadata: String
+  metadata_not: String
+  metadata_gt: String
+  metadata_lt: String
+  metadata_gte: String
+  metadata_lte: String
+  metadata_in: [String!]
+  metadata_not_in: [String!]
+  metadata_contains: String
+  metadata_not_contains: String
+  metadata_starts_with: String
+  metadata_not_starts_with: String
+  metadata_ends_with: String
+  metadata_not_ends_with: String
+  text: String
+  text_not: String
+  text_gt: String
+  text_lt: String
+  text_gte: String
+  text_lte: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  voteCount: BigInt
+  voteCount_not: BigInt
+  voteCount_gt: BigInt
+  voteCount_lt: BigInt
+  voteCount_gte: BigInt
+  voteCount_lte: BigInt
+  voteCount_in: [BigInt!]
+  voteCount_not_in: [BigInt!]
+  positiveVoteCount: BigInt
+  positiveVoteCount_not: BigInt
+  positiveVoteCount_gt: BigInt
+  positiveVoteCount_lt: BigInt
+  positiveVoteCount_gte: BigInt
+  positiveVoteCount_lte: BigInt
+  positiveVoteCount_in: [BigInt!]
+  positiveVoteCount_not_in: [BigInt!]
+  negativeVoteCount: BigInt
+  negativeVoteCount_not: BigInt
+  negativeVoteCount_gt: BigInt
+  negativeVoteCount_lt: BigInt
+  negativeVoteCount_gte: BigInt
+  negativeVoteCount_lte: BigInt
+  negativeVoteCount_in: [BigInt!]
+  negativeVoteCount_not_in: [BigInt!]
+  currentQuorum: BigDecimal
+  currentQuorum_not: BigDecimal
+  currentQuorum_gt: BigDecimal
+  currentQuorum_lt: BigDecimal
+  currentQuorum_gte: BigDecimal
+  currentQuorum_lte: BigDecimal
+  currentQuorum_in: [BigDecimal!]
+  currentQuorum_not_in: [BigDecimal!]
+  currentSupport: BigDecimal
+  currentSupport_not: BigDecimal
+  currentSupport_gt: BigDecimal
+  currentSupport_lt: BigDecimal
+  currentSupport_gte: BigDecimal
+  currentSupport_lte: BigDecimal
+  currentSupport_in: [BigDecimal!]
+  currentSupport_not_in: [BigDecimal!]
+  stakedSupport: BigDecimal
+  stakedSupport_not: BigDecimal
+  stakedSupport_gt: BigDecimal
+  stakedSupport_lt: BigDecimal
+  stakedSupport_gte: BigDecimal
+  stakedSupport_lte: BigDecimal
+  stakedSupport_in: [BigDecimal!]
+  stakedSupport_not_in: [BigDecimal!]
+  totalStaked: BigDecimal
+  totalStaked_not: BigDecimal
+  totalStaked_gt: BigDecimal
+  totalStaked_lt: BigDecimal
+  totalStaked_gte: BigDecimal
+  totalStaked_lte: BigDecimal
+  totalStaked_in: [BigDecimal!]
+  totalStaked_not_in: [BigDecimal!]
+  created: BigInt
+  created_not: BigInt
+  created_gt: BigInt
+  created_lt: BigInt
+  created_gte: BigInt
+  created_lte: BigInt
+  created_in: [BigInt!]
+  created_not_in: [BigInt!]
+  createdAtBlock: BigInt
+  createdAtBlock_not: BigInt
+  createdAtBlock_gt: BigInt
+  createdAtBlock_lt: BigInt
+  createdAtBlock_gte: BigInt
+  createdAtBlock_lte: BigInt
+  createdAtBlock_in: [BigInt!]
+  createdAtBlock_not_in: [BigInt!]
+  createdAtTransaction: Bytes
+  createdAtTransaction_not: Bytes
+  createdAtTransaction_in: [Bytes!]
+  createdAtTransaction_not_in: [Bytes!]
+  createdAtTransaction_contains: Bytes
+  createdAtTransaction_not_contains: Bytes
+  updated: BigInt
+  updated_not: BigInt
+  updated_gt: BigInt
+  updated_lt: BigInt
+  updated_gte: BigInt
+  updated_lte: BigInt
+  updated_in: [BigInt!]
+  updated_not_in: [BigInt!]
+  updatedAtBlock: BigInt
+  updatedAtBlock_not: BigInt
+  updatedAtBlock_gt: BigInt
+  updatedAtBlock_lt: BigInt
+  updatedAtBlock_gte: BigInt
+  updatedAtBlock_lte: BigInt
+  updatedAtBlock_in: [BigInt!]
+  updatedAtBlock_not_in: [BigInt!]
+  updatedAtTransaction: Bytes
+  updatedAtTransaction_not: Bytes
+  updatedAtTransaction_in: [Bytes!]
+  updatedAtTransaction_not_in: [Bytes!]
+  updatedAtTransaction_contains: Bytes
+  updatedAtTransaction_not_contains: Bytes
+  executed: BigInt
+  executed_not: BigInt
+  executed_gt: BigInt
+  executed_lt: BigInt
+  executed_gte: BigInt
+  executed_lte: BigInt
+  executed_in: [BigInt!]
+  executed_not_in: [BigInt!]
+  executedAtBlock: BigInt
+  executedAtBlock_not: BigInt
+  executedAtBlock_gt: BigInt
+  executedAtBlock_lt: BigInt
+  executedAtBlock_gte: BigInt
+  executedAtBlock_lte: BigInt
+  executedAtBlock_in: [BigInt!]
+  executedAtBlock_not_in: [BigInt!]
+  executedAtTransaction: Bytes
+  executedAtTransaction_not: Bytes
+  executedAtTransaction_in: [Bytes!]
+  executedAtTransaction_not_in: [Bytes!]
+  executedAtTransaction_contains: Bytes
+  executedAtTransaction_not_contains: Bytes
+}
+
+enum Proposal_orderBy {
+  id
+  number
+  app
+  creator
+  executionScript
+  expireDate
+  minimumQuorum
+  requiredSupport
+  snapshotBlock
+  votingPower
+  metadata
+  text
+  voteCount
+  positiveVoteCount
+  negativeVoteCount
+  currentQuorum
+  currentSupport
+  stakedSupport
+  totalStaked
+  created
+  createdAtBlock
+  createdAtTransaction
+  updated
+  updatedAtBlock
+  updatedAtTransaction
+  executed
+  executedAtBlock
+  executedAtTransaction
+  votes
+}
+
+type Query {
+  systemState(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): SystemState
+  systemStates(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: SystemState_orderBy
+    orderDirection: OrderDirection
+    where: SystemState_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [SystemState!]!
+  account(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Account
+  accounts(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Account_orderBy
+    orderDirection: OrderDirection
+    where: Account_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Account!]!
+  contract(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Contract
+  contracts(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Contract_orderBy
+    orderDirection: OrderDirection
+    where: Contract_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Contract!]!
+  contractVersion(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ContractVersion
+  contractVersions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ContractVersion_orderBy
+    orderDirection: OrderDirection
+    where: ContractVersion_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ContractVersion!]!
+  gauge(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Gauge
+  gauges(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Gauge_orderBy
+    orderDirection: OrderDirection
+    where: Gauge_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Gauge!]!
+  gaugeWeight(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeWeight
+  gaugeWeights(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeWeight_orderBy
+    orderDirection: OrderDirection
+    where: GaugeWeight_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeWeight!]!
+  gaugeWeightVote(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeWeightVote
+  gaugeWeightVotes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeWeightVote_orderBy
+    orderDirection: OrderDirection
+    where: GaugeWeightVote_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeWeightVote!]!
+  gaugeType(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeType
+  gaugeTypes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeType_orderBy
+    orderDirection: OrderDirection
+    where: GaugeType_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeType!]!
+  gaugeTypeWeight(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeTypeWeight
+  gaugeTypeWeights(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeTypeWeight_orderBy
+    orderDirection: OrderDirection
+    where: GaugeTypeWeight_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeTypeWeight!]!
+  gaugeTotalWeight(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeTotalWeight
+  gaugeTotalWeights(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeTotalWeight_orderBy
+    orderDirection: OrderDirection
+    where: GaugeTotalWeight_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeTotalWeight!]!
+  gaugeLiquidity(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeLiquidity
+  gaugeLiquidities(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeLiquidity_orderBy
+    orderDirection: OrderDirection
+    where: GaugeLiquidity_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeLiquidity!]!
+  gaugeDeposit(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeDeposit
+  gaugeDeposits(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeDeposit_orderBy
+    orderDirection: OrderDirection
+    where: GaugeDeposit_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeDeposit!]!
+  gaugeWithdraw(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeWithdraw
+  gaugeWithdraws(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeWithdraw_orderBy
+    orderDirection: OrderDirection
+    where: GaugeWithdraw_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeWithdraw!]!
+  lpToken(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): LpToken
+  lpTokens(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: LpToken_orderBy
+    orderDirection: OrderDirection
+    where: LpToken_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [LpToken!]!
+  pool(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Pool
+  pools(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Pool_orderBy
+    orderDirection: OrderDirection
+    where: Pool_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Pool!]!
+  coin(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Coin
+  coins(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Coin_orderBy
+    orderDirection: OrderDirection
+    where: Coin_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Coin!]!
+  underlyingCoin(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): UnderlyingCoin
+  underlyingCoins(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: UnderlyingCoin_orderBy
+    orderDirection: OrderDirection
+    where: UnderlyingCoin_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [UnderlyingCoin!]!
+  token(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Token
+  tokens(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Token_orderBy
+    orderDirection: OrderDirection
+    where: Token_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Token!]!
+  dailyVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): DailyVolume
+  dailyVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: DailyVolume_orderBy
+    orderDirection: OrderDirection
+    where: DailyVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [DailyVolume!]!
+  hourlyVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): HourlyVolume
+  hourlyVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: HourlyVolume_orderBy
+    orderDirection: OrderDirection
+    where: HourlyVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [HourlyVolume!]!
+  weeklyVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): WeeklyVolume
+  weeklyVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: WeeklyVolume_orderBy
+    orderDirection: OrderDirection
+    where: WeeklyVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [WeeklyVolume!]!
+  adminFeeChangelog(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AdminFeeChangelog
+  adminFeeChangelogs(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AdminFeeChangelog_orderBy
+    orderDirection: OrderDirection
+    where: AdminFeeChangelog_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AdminFeeChangelog!]!
+  amplificationCoeffChangelog(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AmplificationCoeffChangelog
+  amplificationCoeffChangelogs(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AmplificationCoeffChangelog_orderBy
+    orderDirection: OrderDirection
+    where: AmplificationCoeffChangelog_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AmplificationCoeffChangelog!]!
+  feeChangelog(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): FeeChangelog
+  feeChangelogs(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: FeeChangelog_orderBy
+    orderDirection: OrderDirection
+    where: FeeChangelog_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [FeeChangelog!]!
+  transferOwnershipEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): TransferOwnershipEvent
+  transferOwnershipEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: TransferOwnershipEvent_orderBy
+    orderDirection: OrderDirection
+    where: TransferOwnershipEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [TransferOwnershipEvent!]!
+  addLiquidityEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AddLiquidityEvent
+  addLiquidityEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AddLiquidityEvent_orderBy
+    orderDirection: OrderDirection
+    where: AddLiquidityEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AddLiquidityEvent!]!
+  removeLiquidityEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): RemoveLiquidityEvent
+  removeLiquidityEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: RemoveLiquidityEvent_orderBy
+    orderDirection: OrderDirection
+    where: RemoveLiquidityEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [RemoveLiquidityEvent!]!
+  removeLiquidityOneEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): RemoveLiquidityOneEvent
+  removeLiquidityOneEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: RemoveLiquidityOneEvent_orderBy
+    orderDirection: OrderDirection
+    where: RemoveLiquidityOneEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [RemoveLiquidityOneEvent!]!
+  exchange(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Exchange
+  exchanges(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Exchange_orderBy
+    orderDirection: OrderDirection
+    where: Exchange_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Exchange!]!
+  votingApp(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): VotingApp
+  votingApps(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: VotingApp_orderBy
+    orderDirection: OrderDirection
+    where: VotingApp_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [VotingApp!]!
+  proposal(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Proposal
+  proposals(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Proposal_orderBy
+    orderDirection: OrderDirection
+    where: Proposal_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Proposal!]!
+  proposalVote(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ProposalVote
+  proposalVotes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ProposalVote_orderBy
+    orderDirection: OrderDirection
+    where: ProposalVote_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ProposalVote!]!
+  tradeVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): TradeVolume
+  tradeVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: TradeVolume_orderBy
+    orderDirection: OrderDirection
+    where: TradeVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [TradeVolume!]!
+  poolEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): PoolEvent
+  poolEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: PoolEvent_orderBy
+    orderDirection: OrderDirection
+    where: PoolEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [PoolEvent!]!
+
+  """Access to subgraph metadata"""
+  _meta(block: Block_height): _Meta_
+}
+
+type RemoveLiquidityEvent implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  provider: Account!
+  tokenAmounts: [BigInt!]!
+  fees: [BigInt!]
+  tokenSupply: BigInt
+  invariant: BigInt
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input RemoveLiquidityEvent_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  provider: String
+  provider_not: String
+  provider_gt: String
+  provider_lt: String
+  provider_gte: String
+  provider_lte: String
+  provider_in: [String!]
+  provider_not_in: [String!]
+  provider_contains: String
+  provider_not_contains: String
+  provider_starts_with: String
+  provider_not_starts_with: String
+  provider_ends_with: String
+  provider_not_ends_with: String
+  tokenAmounts: [BigInt!]
+  tokenAmounts_not: [BigInt!]
+  tokenAmounts_contains: [BigInt!]
+  tokenAmounts_not_contains: [BigInt!]
+  fees: [BigInt!]
+  fees_not: [BigInt!]
+  fees_contains: [BigInt!]
+  fees_not_contains: [BigInt!]
+  tokenSupply: BigInt
+  tokenSupply_not: BigInt
+  tokenSupply_gt: BigInt
+  tokenSupply_lt: BigInt
+  tokenSupply_gte: BigInt
+  tokenSupply_lte: BigInt
+  tokenSupply_in: [BigInt!]
+  tokenSupply_not_in: [BigInt!]
+  invariant: BigInt
+  invariant_not: BigInt
+  invariant_gt: BigInt
+  invariant_lt: BigInt
+  invariant_gte: BigInt
+  invariant_lte: BigInt
+  invariant_in: [BigInt!]
+  invariant_not_in: [BigInt!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum RemoveLiquidityEvent_orderBy {
+  id
+  pool
+  provider
+  tokenAmounts
+  fees
+  tokenSupply
+  invariant
+  block
+  timestamp
+  transaction
+}
+
+type RemoveLiquidityOneEvent implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  provider: Account!
+  tokenAmount: BigInt!
+  coinAmount: BigInt!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input RemoveLiquidityOneEvent_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  provider: String
+  provider_not: String
+  provider_gt: String
+  provider_lt: String
+  provider_gte: String
+  provider_lte: String
+  provider_in: [String!]
+  provider_not_in: [String!]
+  provider_contains: String
+  provider_not_contains: String
+  provider_starts_with: String
+  provider_not_starts_with: String
+  provider_ends_with: String
+  provider_not_ends_with: String
+  tokenAmount: BigInt
+  tokenAmount_not: BigInt
+  tokenAmount_gt: BigInt
+  tokenAmount_lt: BigInt
+  tokenAmount_gte: BigInt
+  tokenAmount_lte: BigInt
+  tokenAmount_in: [BigInt!]
+  tokenAmount_not_in: [BigInt!]
+  coinAmount: BigInt
+  coinAmount_not: BigInt
+  coinAmount_gt: BigInt
+  coinAmount_lt: BigInt
+  coinAmount_gte: BigInt
+  coinAmount_lte: BigInt
+  coinAmount_in: [BigInt!]
+  coinAmount_not_in: [BigInt!]
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum RemoveLiquidityOneEvent_orderBy {
+  id
+  pool
+  provider
+  tokenAmount
+  coinAmount
+  block
+  timestamp
+  transaction
+}
+
+type Subscription {
+  systemState(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): SystemState
+  systemStates(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: SystemState_orderBy
+    orderDirection: OrderDirection
+    where: SystemState_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [SystemState!]!
+  account(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Account
+  accounts(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Account_orderBy
+    orderDirection: OrderDirection
+    where: Account_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Account!]!
+  contract(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Contract
+  contracts(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Contract_orderBy
+    orderDirection: OrderDirection
+    where: Contract_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Contract!]!
+  contractVersion(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ContractVersion
+  contractVersions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ContractVersion_orderBy
+    orderDirection: OrderDirection
+    where: ContractVersion_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ContractVersion!]!
+  gauge(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Gauge
+  gauges(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Gauge_orderBy
+    orderDirection: OrderDirection
+    where: Gauge_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Gauge!]!
+  gaugeWeight(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeWeight
+  gaugeWeights(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeWeight_orderBy
+    orderDirection: OrderDirection
+    where: GaugeWeight_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeWeight!]!
+  gaugeWeightVote(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeWeightVote
+  gaugeWeightVotes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeWeightVote_orderBy
+    orderDirection: OrderDirection
+    where: GaugeWeightVote_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeWeightVote!]!
+  gaugeType(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeType
+  gaugeTypes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeType_orderBy
+    orderDirection: OrderDirection
+    where: GaugeType_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeType!]!
+  gaugeTypeWeight(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeTypeWeight
+  gaugeTypeWeights(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeTypeWeight_orderBy
+    orderDirection: OrderDirection
+    where: GaugeTypeWeight_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeTypeWeight!]!
+  gaugeTotalWeight(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeTotalWeight
+  gaugeTotalWeights(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeTotalWeight_orderBy
+    orderDirection: OrderDirection
+    where: GaugeTotalWeight_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeTotalWeight!]!
+  gaugeLiquidity(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeLiquidity
+  gaugeLiquidities(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeLiquidity_orderBy
+    orderDirection: OrderDirection
+    where: GaugeLiquidity_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeLiquidity!]!
+  gaugeDeposit(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeDeposit
+  gaugeDeposits(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeDeposit_orderBy
+    orderDirection: OrderDirection
+    where: GaugeDeposit_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeDeposit!]!
+  gaugeWithdraw(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): GaugeWithdraw
+  gaugeWithdraws(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: GaugeWithdraw_orderBy
+    orderDirection: OrderDirection
+    where: GaugeWithdraw_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [GaugeWithdraw!]!
+  lpToken(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): LpToken
+  lpTokens(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: LpToken_orderBy
+    orderDirection: OrderDirection
+    where: LpToken_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [LpToken!]!
+  pool(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Pool
+  pools(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Pool_orderBy
+    orderDirection: OrderDirection
+    where: Pool_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Pool!]!
+  coin(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Coin
+  coins(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Coin_orderBy
+    orderDirection: OrderDirection
+    where: Coin_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Coin!]!
+  underlyingCoin(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): UnderlyingCoin
+  underlyingCoins(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: UnderlyingCoin_orderBy
+    orderDirection: OrderDirection
+    where: UnderlyingCoin_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [UnderlyingCoin!]!
+  token(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Token
+  tokens(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Token_orderBy
+    orderDirection: OrderDirection
+    where: Token_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Token!]!
+  dailyVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): DailyVolume
+  dailyVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: DailyVolume_orderBy
+    orderDirection: OrderDirection
+    where: DailyVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [DailyVolume!]!
+  hourlyVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): HourlyVolume
+  hourlyVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: HourlyVolume_orderBy
+    orderDirection: OrderDirection
+    where: HourlyVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [HourlyVolume!]!
+  weeklyVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): WeeklyVolume
+  weeklyVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: WeeklyVolume_orderBy
+    orderDirection: OrderDirection
+    where: WeeklyVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [WeeklyVolume!]!
+  adminFeeChangelog(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AdminFeeChangelog
+  adminFeeChangelogs(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AdminFeeChangelog_orderBy
+    orderDirection: OrderDirection
+    where: AdminFeeChangelog_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AdminFeeChangelog!]!
+  amplificationCoeffChangelog(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AmplificationCoeffChangelog
+  amplificationCoeffChangelogs(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AmplificationCoeffChangelog_orderBy
+    orderDirection: OrderDirection
+    where: AmplificationCoeffChangelog_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AmplificationCoeffChangelog!]!
+  feeChangelog(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): FeeChangelog
+  feeChangelogs(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: FeeChangelog_orderBy
+    orderDirection: OrderDirection
+    where: FeeChangelog_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [FeeChangelog!]!
+  transferOwnershipEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): TransferOwnershipEvent
+  transferOwnershipEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: TransferOwnershipEvent_orderBy
+    orderDirection: OrderDirection
+    where: TransferOwnershipEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [TransferOwnershipEvent!]!
+  addLiquidityEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): AddLiquidityEvent
+  addLiquidityEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: AddLiquidityEvent_orderBy
+    orderDirection: OrderDirection
+    where: AddLiquidityEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [AddLiquidityEvent!]!
+  removeLiquidityEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): RemoveLiquidityEvent
+  removeLiquidityEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: RemoveLiquidityEvent_orderBy
+    orderDirection: OrderDirection
+    where: RemoveLiquidityEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [RemoveLiquidityEvent!]!
+  removeLiquidityOneEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): RemoveLiquidityOneEvent
+  removeLiquidityOneEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: RemoveLiquidityOneEvent_orderBy
+    orderDirection: OrderDirection
+    where: RemoveLiquidityOneEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [RemoveLiquidityOneEvent!]!
+  exchange(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Exchange
+  exchanges(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Exchange_orderBy
+    orderDirection: OrderDirection
+    where: Exchange_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Exchange!]!
+  votingApp(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): VotingApp
+  votingApps(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: VotingApp_orderBy
+    orderDirection: OrderDirection
+    where: VotingApp_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [VotingApp!]!
+  proposal(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): Proposal
+  proposals(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: Proposal_orderBy
+    orderDirection: OrderDirection
+    where: Proposal_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [Proposal!]!
+  proposalVote(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): ProposalVote
+  proposalVotes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: ProposalVote_orderBy
+    orderDirection: OrderDirection
+    where: ProposalVote_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [ProposalVote!]!
+  tradeVolume(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): TradeVolume
+  tradeVolumes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: TradeVolume_orderBy
+    orderDirection: OrderDirection
+    where: TradeVolume_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [TradeVolume!]!
+  poolEvent(
+    id: ID!
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): PoolEvent
+  poolEvents(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: PoolEvent_orderBy
+    orderDirection: OrderDirection
+    where: PoolEvent_filter
+
+    """
+    The block at which the query should be executed. Can either be an `{ number: Int }` containing the block number or a `{ hash: Bytes }` value containing a block hash. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+  ): [PoolEvent!]!
+
+  """Access to subgraph metadata"""
+  _meta(block: Block_height): _Meta_
+}
+
+type SystemState {
+  """ Singleton ID, equals to 'current' """
+  id: ID!
+
+  """ Current pool registry address """
+  registryContract: Bytes
+
+  """ Number of contracts in the AddressProvider registry """
+  contractCount: BigInt!
+
+  """ Number of gauges registered """
+  gaugeCount: BigInt!
+
+  """ Number of gauge types registered """
+  gaugeTypeCount: BigInt!
+
+  """ Number of active pools """
+  poolCount: BigInt!
+
+  """ Number of tokens registered """
+  tokenCount: BigInt!
+
+  """ Total number of pools (including removed ones) """
+  totalPoolCount: BigInt!
+  updated: BigInt!
+  updatedAtBlock: BigInt!
+  updatedAtTransaction: Bytes!
+}
+
+input SystemState_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  registryContract: Bytes
+  registryContract_not: Bytes
+  registryContract_in: [Bytes!]
+  registryContract_not_in: [Bytes!]
+  registryContract_contains: Bytes
+  registryContract_not_contains: Bytes
+  contractCount: BigInt
+  contractCount_not: BigInt
+  contractCount_gt: BigInt
+  contractCount_lt: BigInt
+  contractCount_gte: BigInt
+  contractCount_lte: BigInt
+  contractCount_in: [BigInt!]
+  contractCount_not_in: [BigInt!]
+  gaugeCount: BigInt
+  gaugeCount_not: BigInt
+  gaugeCount_gt: BigInt
+  gaugeCount_lt: BigInt
+  gaugeCount_gte: BigInt
+  gaugeCount_lte: BigInt
+  gaugeCount_in: [BigInt!]
+  gaugeCount_not_in: [BigInt!]
+  gaugeTypeCount: BigInt
+  gaugeTypeCount_not: BigInt
+  gaugeTypeCount_gt: BigInt
+  gaugeTypeCount_lt: BigInt
+  gaugeTypeCount_gte: BigInt
+  gaugeTypeCount_lte: BigInt
+  gaugeTypeCount_in: [BigInt!]
+  gaugeTypeCount_not_in: [BigInt!]
+  poolCount: BigInt
+  poolCount_not: BigInt
+  poolCount_gt: BigInt
+  poolCount_lt: BigInt
+  poolCount_gte: BigInt
+  poolCount_lte: BigInt
+  poolCount_in: [BigInt!]
+  poolCount_not_in: [BigInt!]
+  tokenCount: BigInt
+  tokenCount_not: BigInt
+  tokenCount_gt: BigInt
+  tokenCount_lt: BigInt
+  tokenCount_gte: BigInt
+  tokenCount_lte: BigInt
+  tokenCount_in: [BigInt!]
+  tokenCount_not_in: [BigInt!]
+  totalPoolCount: BigInt
+  totalPoolCount_not: BigInt
+  totalPoolCount_gt: BigInt
+  totalPoolCount_lt: BigInt
+  totalPoolCount_gte: BigInt
+  totalPoolCount_lte: BigInt
+  totalPoolCount_in: [BigInt!]
+  totalPoolCount_not_in: [BigInt!]
+  updated: BigInt
+  updated_not: BigInt
+  updated_gt: BigInt
+  updated_lt: BigInt
+  updated_gte: BigInt
+  updated_lte: BigInt
+  updated_in: [BigInt!]
+  updated_not_in: [BigInt!]
+  updatedAtBlock: BigInt
+  updatedAtBlock_not: BigInt
+  updatedAtBlock_gt: BigInt
+  updatedAtBlock_lt: BigInt
+  updatedAtBlock_gte: BigInt
+  updatedAtBlock_lte: BigInt
+  updatedAtBlock_in: [BigInt!]
+  updatedAtBlock_not_in: [BigInt!]
+  updatedAtTransaction: Bytes
+  updatedAtTransaction_not: Bytes
+  updatedAtTransaction_in: [Bytes!]
+  updatedAtTransaction_not_in: [Bytes!]
+  updatedAtTransaction_contains: Bytes
+  updatedAtTransaction_not_contains: Bytes
+}
+
+enum SystemState_orderBy {
+  id
+  registryContract
+  contractCount
+  gaugeCount
+  gaugeTypeCount
+  poolCount
+  tokenCount
+  totalPoolCount
+  updated
+  updatedAtBlock
+  updatedAtTransaction
+}
+
+type Token {
+  id: ID!
+  address: Bytes!
+  decimals: BigInt!
+  name: String
+  symbol: String
+  pools(skip: Int = 0, first: Int = 100, orderBy: Pool_orderBy, orderDirection: OrderDirection, where: Pool_filter): [Pool!]
+  coins(skip: Int = 0, first: Int = 100, orderBy: Coin_orderBy, orderDirection: OrderDirection, where: Coin_filter): [Coin!]
+  underlyingCoins(skip: Int = 0, first: Int = 100, orderBy: UnderlyingCoin_orderBy, orderDirection: OrderDirection, where: UnderlyingCoin_filter): [UnderlyingCoin!]
+}
+
+input Token_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  address: Bytes
+  address_not: Bytes
+  address_in: [Bytes!]
+  address_not_in: [Bytes!]
+  address_contains: Bytes
+  address_not_contains: Bytes
+  decimals: BigInt
+  decimals_not: BigInt
+  decimals_gt: BigInt
+  decimals_lt: BigInt
+  decimals_gte: BigInt
+  decimals_lte: BigInt
+  decimals_in: [BigInt!]
+  decimals_not_in: [BigInt!]
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  symbol: String
+  symbol_not: String
+  symbol_gt: String
+  symbol_lt: String
+  symbol_gte: String
+  symbol_lte: String
+  symbol_in: [String!]
+  symbol_not_in: [String!]
+  symbol_contains: String
+  symbol_not_contains: String
+  symbol_starts_with: String
+  symbol_not_starts_with: String
+  symbol_ends_with: String
+  symbol_not_ends_with: String
+  pools: [String!]
+  pools_not: [String!]
+  pools_contains: [String!]
+  pools_not_contains: [String!]
+}
+
+enum Token_orderBy {
+  id
+  address
+  decimals
+  name
+  symbol
+  pools
+  coins
+  underlyingCoins
+}
+
+interface TradeVolume {
+  pool: Pool!
+  timestamp: BigInt!
+  volume: BigDecimal!
+}
+
+input TradeVolume_filter {
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  volume: BigDecimal
+  volume_not: BigDecimal
+  volume_gt: BigDecimal
+  volume_lt: BigDecimal
+  volume_gte: BigDecimal
+  volume_lte: BigDecimal
+  volume_in: [BigDecimal!]
+  volume_not_in: [BigDecimal!]
+}
+
+enum TradeVolume_orderBy {
+  pool
+  timestamp
+  volume
+}
+
+type TransferOwnershipEvent implements PoolEvent {
+  id: ID!
+  pool: Pool!
+  newAdmin: Bytes!
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
+}
+
+input TransferOwnershipEvent_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  newAdmin: Bytes
+  newAdmin_not: Bytes
+  newAdmin_in: [Bytes!]
+  newAdmin_not_in: [Bytes!]
+  newAdmin_contains: Bytes
+  newAdmin_not_contains: Bytes
+  block: BigInt
+  block_not: BigInt
+  block_gt: BigInt
+  block_lt: BigInt
+  block_gte: BigInt
+  block_lte: BigInt
+  block_in: [BigInt!]
+  block_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  transaction: Bytes
+  transaction_not: Bytes
+  transaction_in: [Bytes!]
+  transaction_not_in: [Bytes!]
+  transaction_contains: Bytes
+  transaction_not_contains: Bytes
+}
+
+enum TransferOwnershipEvent_orderBy {
+  id
+  pool
+  newAdmin
+  block
+  timestamp
+  transaction
+}
+
+type UnderlyingCoin {
+  """ Equals to: <pool_id>-<coin_index>"""
+  id: ID!
+
+  """ Coin index """
+  index: Int!
+  pool: Pool!
+  token: Token!
+  coin: Coin!
+  balance: BigDecimal!
+  updated: BigInt!
+  updatedAtBlock: BigInt!
+  updatedAtTransaction: Bytes!
+}
+
+input UnderlyingCoin_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  index: Int
+  index_not: Int
+  index_gt: Int
+  index_lt: Int
+  index_gte: Int
+  index_lte: Int
+  index_in: [Int!]
+  index_not_in: [Int!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  token: String
+  token_not: String
+  token_gt: String
+  token_lt: String
+  token_gte: String
+  token_lte: String
+  token_in: [String!]
+  token_not_in: [String!]
+  token_contains: String
+  token_not_contains: String
+  token_starts_with: String
+  token_not_starts_with: String
+  token_ends_with: String
+  token_not_ends_with: String
+  coin: String
+  coin_not: String
+  coin_gt: String
+  coin_lt: String
+  coin_gte: String
+  coin_lte: String
+  coin_in: [String!]
+  coin_not_in: [String!]
+  coin_contains: String
+  coin_not_contains: String
+  coin_starts_with: String
+  coin_not_starts_with: String
+  coin_ends_with: String
+  coin_not_ends_with: String
+  balance: BigDecimal
+  balance_not: BigDecimal
+  balance_gt: BigDecimal
+  balance_lt: BigDecimal
+  balance_gte: BigDecimal
+  balance_lte: BigDecimal
+  balance_in: [BigDecimal!]
+  balance_not_in: [BigDecimal!]
+  updated: BigInt
+  updated_not: BigInt
+  updated_gt: BigInt
+  updated_lt: BigInt
+  updated_gte: BigInt
+  updated_lte: BigInt
+  updated_in: [BigInt!]
+  updated_not_in: [BigInt!]
+  updatedAtBlock: BigInt
+  updatedAtBlock_not: BigInt
+  updatedAtBlock_gt: BigInt
+  updatedAtBlock_lt: BigInt
+  updatedAtBlock_gte: BigInt
+  updatedAtBlock_lte: BigInt
+  updatedAtBlock_in: [BigInt!]
+  updatedAtBlock_not_in: [BigInt!]
+  updatedAtTransaction: Bytes
+  updatedAtTransaction_not: Bytes
+  updatedAtTransaction_in: [Bytes!]
+  updatedAtTransaction_not_in: [Bytes!]
+  updatedAtTransaction_contains: Bytes
+  updatedAtTransaction_not_contains: Bytes
+}
+
+enum UnderlyingCoin_orderBy {
+  id
+  index
+  pool
+  token
+  coin
+  balance
+  updated
+  updatedAtBlock
+  updatedAtTransaction
+}
+
+type VotingApp {
+  """ Equals to app address """
+  id: ID!
+
+  """ Voting app instance """
+  address: Bytes!
+
+  """ App codename """
+  codename: String!
+
+  """ Minimum balance needed to create a proposal """
+  minimumBalance: BigDecimal!
+
+  """ Percentage of positive votes in total possible votes for a proposal to be accepted
+  """
+  minimumQuorum: BigDecimal!
+
+  """ Minimum time needed to pass between user's previous proposal and a user creating a new proposal
+  """
+  minimumTime: BigInt!
+
+  """ Percentage of positive votes needed for a proposal to be accepted """
+  requiredSupport: BigDecimal!
+
+  """ Seconds that a proposal will be open for vote (unless enough votes have been cast to make an early decision)
+  """
+  voteTime: BigInt!
+
+  """ Number of proposals created with this app """
+  proposalCount: BigInt!
+
+  """ Number of votes received by all the proposals created with this app """
+  voteCount: BigInt!
+
+  """ Address of the token used for voting """
+  token: Bytes!
+
+  """ Proposals created through this app instance """
+  proposals(skip: Int = 0, first: Int = 100, orderBy: Proposal_orderBy, orderDirection: OrderDirection, where: Proposal_filter): [Proposal!]
+}
+
+input VotingApp_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  address: Bytes
+  address_not: Bytes
+  address_in: [Bytes!]
+  address_not_in: [Bytes!]
+  address_contains: Bytes
+  address_not_contains: Bytes
+  codename: String
+  codename_not: String
+  codename_gt: String
+  codename_lt: String
+  codename_gte: String
+  codename_lte: String
+  codename_in: [String!]
+  codename_not_in: [String!]
+  codename_contains: String
+  codename_not_contains: String
+  codename_starts_with: String
+  codename_not_starts_with: String
+  codename_ends_with: String
+  codename_not_ends_with: String
+  minimumBalance: BigDecimal
+  minimumBalance_not: BigDecimal
+  minimumBalance_gt: BigDecimal
+  minimumBalance_lt: BigDecimal
+  minimumBalance_gte: BigDecimal
+  minimumBalance_lte: BigDecimal
+  minimumBalance_in: [BigDecimal!]
+  minimumBalance_not_in: [BigDecimal!]
+  minimumQuorum: BigDecimal
+  minimumQuorum_not: BigDecimal
+  minimumQuorum_gt: BigDecimal
+  minimumQuorum_lt: BigDecimal
+  minimumQuorum_gte: BigDecimal
+  minimumQuorum_lte: BigDecimal
+  minimumQuorum_in: [BigDecimal!]
+  minimumQuorum_not_in: [BigDecimal!]
+  minimumTime: BigInt
+  minimumTime_not: BigInt
+  minimumTime_gt: BigInt
+  minimumTime_lt: BigInt
+  minimumTime_gte: BigInt
+  minimumTime_lte: BigInt
+  minimumTime_in: [BigInt!]
+  minimumTime_not_in: [BigInt!]
+  requiredSupport: BigDecimal
+  requiredSupport_not: BigDecimal
+  requiredSupport_gt: BigDecimal
+  requiredSupport_lt: BigDecimal
+  requiredSupport_gte: BigDecimal
+  requiredSupport_lte: BigDecimal
+  requiredSupport_in: [BigDecimal!]
+  requiredSupport_not_in: [BigDecimal!]
+  voteTime: BigInt
+  voteTime_not: BigInt
+  voteTime_gt: BigInt
+  voteTime_lt: BigInt
+  voteTime_gte: BigInt
+  voteTime_lte: BigInt
+  voteTime_in: [BigInt!]
+  voteTime_not_in: [BigInt!]
+  proposalCount: BigInt
+  proposalCount_not: BigInt
+  proposalCount_gt: BigInt
+  proposalCount_lt: BigInt
+  proposalCount_gte: BigInt
+  proposalCount_lte: BigInt
+  proposalCount_in: [BigInt!]
+  proposalCount_not_in: [BigInt!]
+  voteCount: BigInt
+  voteCount_not: BigInt
+  voteCount_gt: BigInt
+  voteCount_lt: BigInt
+  voteCount_gte: BigInt
+  voteCount_lte: BigInt
+  voteCount_in: [BigInt!]
+  voteCount_not_in: [BigInt!]
+  token: Bytes
+  token_not: Bytes
+  token_in: [Bytes!]
+  token_not_in: [Bytes!]
+  token_contains: Bytes
+  token_not_contains: Bytes
+}
+
+enum VotingApp_orderBy {
+  id
+  address
+  codename
+  minimumBalance
+  minimumQuorum
+  minimumTime
+  requiredSupport
+  voteTime
+  proposalCount
+  voteCount
+  token
+  proposals
+}
+
+type WeeklyVolume implements TradeVolume {
+  id: ID!
+  pool: Pool!
+  timestamp: BigInt!
+  volume: BigDecimal!
+}
+
+input WeeklyVolume_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_not_contains: String
+  pool_starts_with: String
+  pool_not_starts_with: String
+  pool_ends_with: String
+  pool_not_ends_with: String
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  volume: BigDecimal
+  volume_not: BigDecimal
+  volume_gt: BigDecimal
+  volume_lt: BigDecimal
+  volume_gte: BigDecimal
+  volume_lte: BigDecimal
+  volume_in: [BigDecimal!]
+  volume_not_in: [BigDecimal!]
+}
+
+enum WeeklyVolume_orderBy {
+  id
+  pool
+  timestamp
+  volume
+}
+
+type _Block_ {
+  """The hash of the block"""
+  hash: Bytes
+
+  """The block number"""
+  number: Int!
+}
+
+"""The type for the top-level _meta field"""
+type _Meta_ {
+  """
+  Information about a specific subgraph block. The hash of the block
+  will be null if the _meta field has a block constraint that asks for
+  a block number. It will be filled if the _meta field has no block constraint
+  and therefore asks for the latest  block
+
+  """
+  block: _Block_!
+
+  """The deployment ID"""
+  deployment: String!
+
+  """If `true`, the subgraph encountered indexing errors at some past block"""
+  hasIndexingErrors: Boolean!
+}
+
+enum _SubgraphErrorPolicy_ {
+  """Data will be returned even if the subgraph has indexing errors"""
+  allow
+
+  """
+  If the subgraph has indexing errors, data will be omitted. The default.
+  """
+  deny
+}
