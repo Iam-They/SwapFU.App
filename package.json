@@ -1,22 +1,59 @@
 {
   "name": "swapfu",
-  "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "An application that finds and executes profitable swaps on various DeFi blockchains. ",
+  "version": "0.1.0",
+  "author": "Iam They <iam.they@outlook.com>",
   "dependencies": {
-    "@truffle/hdwallet-provider": "^1.1.0"
+    "@fluentui/react": "^8.35.2",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "@types/reactstrap": "^8.7.2",
+    "bootstrap": "^5.1.1",
+    "eslint": "^7.32.0",
+    "gatsby": "^2.3.34",
+    "gatsby-image": "^2.0.41",
+    "gatsby-plugin-manifest": "^2.0.29",
+    "gatsby-plugin-offline": "^2.0.25",
+    "gatsby-plugin-react-helmet": "^3.0.12",
+    "gatsby-plugin-sass": "^2.0.11",
+    "gatsby-plugin-sharp": "^2.0.35",
+    "gatsby-source-filesystem": "^2.0.33",
+    "gatsby-transformer-sharp": "^2.1.18",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.0.0-rc.0",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^5.2.0",
+    "react-icons": "^3.6.1",
+    "sqlite3": "^5.0.2",
+    "typescript": "^4.4.3",
+    "typings": "^2.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "prettier": "^1.17.0"
+  },
+  "keywords": [
+    "gatsby", "DeFi", "Arbitrage"
+  ],
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gatsby build",
+    "develop": "gatsby develop -H 0.0.0.0 -p 8000",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Iam-They/flashloaner-contract.git"
+    "url": "https://github.com/Iam-They/SwapFU.App"
   },
-  "keywords": ["defi", "ethereum", "flashloans"],
-  "author": "Pedro Bergamini",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Iam-They/flashloaner-contract/issues"
-  }
+    "url": "https://github.com/Iam-They/SwapFU.App/issues"
+  },
+  "homepage": "https://billyjacoby.github.io/gatsby-react-bootstrap-starter/"
 }
