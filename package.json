@@ -2,7 +2,7 @@
   "name": "swapfu",
   "private": true,
   "description": "An application that finds and executes profitable swaps on various DeFi blockchains. ",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "author": "Iam They <iam.they@outlook.com>",
   "dependencies": {
     "@fluentui/react": "^8.35.2",
